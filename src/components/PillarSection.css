@@ -68,13 +68,17 @@
   margin-left: 3rem;
 }
 
-@media (max-width: 900px) {
+@media (min-width: 1200px) {
   .pillar-section {
     align-items: center;
   }
-  .pillar-filters,
+  
   .pillar-cards-row {
-    margin-left: 0;
+    margin-left: 35px;
+    justify-content: center;
+  }
+  .pillar-filters {
+    margin-left: -4rem;
     justify-content: center;
   }
   .pillar-cards-row {

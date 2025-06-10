@@ -38,7 +38,6 @@ function Navbar() {
           className="navbar-logo"
         />
       </div>
-
       {/* Desktop Navigation */}
       <div className="navbar-right desktop-layout">
         <span className="navbar-title">List your practice</span>
@@ -76,8 +75,7 @@ function Navbar() {
             </div>
           </div>
         </div>
-      </div>
-
+      </div>{" "}
       {/* Mobile Hamburger Icon */}
       <div className="mobile-layout mobile-menu-toggle">
         <button
@@ -92,7 +90,6 @@ function Navbar() {
           )}
         </button>
       </div>
-
       {/* Mobile Navigation Menu */}
       <div
         className={`mobile-menu ${mobileMenuOpen ? "mobile-menu-open" : ""}`}
@@ -100,6 +97,11 @@ function Navbar() {
       >
         <div className="mobile-menu-content">
           <div className="mobile-menu-header">
+            <img
+              src="/icons/Group 1010108451.svg"
+              alt="ProVital"
+              className="navbar-logo"
+            />
             <button
               className="close-menu-button"
               onClick={() => setMobileMenuOpen(false)}
@@ -107,11 +109,6 @@ function Navbar() {
             >
               <span className="close-icon">✕</span>
             </button>
-            <img
-              src="/icons/Group 1010108451.svg"
-              alt="ProVital"
-              className="navbar-logo"
-            />
           </div>
 
           <div className="mobile-login-sections">
@@ -141,10 +138,7 @@ function Navbar() {
           </div>
 
           <div className="mobile-nav-links">
-            <a href="#doctors" className="mobile-nav-link">
-              Doctors
-              <span className="mobile-nav-arrow">→</span>
-            </a>
+            
             <a href="#list-practice" className="mobile-nav-link">
               List your practice
               <span className="mobile-nav-arrow">→</span>
@@ -163,6 +157,10 @@ function Navbar() {
             </a>
             <a href="#speakers" className="mobile-nav-link">
               Speakers
+              <span className="mobile-nav-arrow">→</span>
+            </a>
+            <a href="#doctors" className="mobile-nav-link">
+              Doctors
               <span className="mobile-nav-arrow">→</span>
             </a>
           </div>

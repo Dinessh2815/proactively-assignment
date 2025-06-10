@@ -126,7 +126,7 @@
 }
 
 .navbar-logo {
-  height: 56px;
+  height: 64px;
   width: auto;
 }
 
@@ -602,9 +602,6 @@
 .mobile-layout {
   display: none;
 }
-.desktop-layout {
-  display: block;
-}
 @media (max-width: 600px) {
   .mobile-layout {
     display: block;
@@ -639,6 +636,7 @@
   display: flex;
   flex-direction: column;
   overflow-y: auto;
+  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .mobile-menu-open {
@@ -659,7 +657,11 @@
   font-size: 24px;
   cursor: pointer;
   color: #333;
-  padding: 0;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-right: 32px;
 }
 
 .mobile-menu-content {
@@ -681,6 +683,7 @@
   padding: 16px;
   margin-bottom: 16px;
   background-color: #ffffff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 }
 
 .mobile-login-title {
@@ -704,6 +707,7 @@
   display: flex;
   flex-direction: column;
   padding: 16px;
+  padding-left: 24px;
 }
 
 .mobile-nav-link {
@@ -733,5 +737,16 @@
   }
   100% {
     transform: translateX(-50%);
+  }
+}
+
+@media (max-width: 600px) {
+  .navbar-logo {
+    margin-left: 0.1rem;
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .navbar-left {
+    margin-left: -2rem;
   }
 }
