@@ -39,6 +39,7 @@
 
 .app {
   font-family: Arial, sans-serif;
+  margin-bottom: 5rem;
 }
 
 .hero-section {
@@ -251,7 +252,6 @@
     border-width: 50px;
 
     transform: rotate(-0.6deg) skewY(-1deg);
-
   }
 }
 
@@ -285,7 +285,7 @@
   align-items: center;
   background: #f7f7f7;
   border-radius: 8px;
-  padding: 0.75rem 1.25rem;
+  padding: 1.4rem 1.25rem;
   flex: 1 1 0;
   min-width: 0;
   border: 1px solid #e0e0e0;
@@ -319,7 +319,7 @@
   border-radius: 10px;
   font-size: 1.1rem;
   font-weight: 500;
-  padding: 0.9rem 2.2rem;
+  padding: 1.4rem 2.2rem;
   cursor: pointer;
   box-shadow: 0px 4px 30px 0px #0000000d;
   transition: background 0.2s, box-shadow 0.2s;
@@ -356,5 +356,86 @@
   .find-now-btn {
     font-size: 1.2rem;
     padding: 1.2rem 2.8rem;
+  }
+}
+
+.grey-question {
+  color: #707070;
+  font-family: "Inter", Arial, sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 133%;
+  letter-spacing: 7.5%;
+  margin-left: 4rem;
+}
+
+.pillars-title-gradient {
+  font-family: "Inter", Arial, sans-serif;
+  font-weight: 600;
+  font-style: italic;
+  font-size: 28px;
+  line-height: 133%;
+  letter-spacing: 0%;
+  background: linear-gradient(289.5deg, #f1ca72 27.25%, #d96e6c 92.08%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-left: 4rem;
+}
+
+.pillars-title-grey {
+  font-family: "Inter", Arial, sans-serif;
+  font-weight: 600;
+  font-size: 28px;
+  line-height: 133%;
+  letter-spacing: 0%;
+  color: #707070;
+  padding: 0 0.4em;
+  border-radius: 4px;
+}
+
+@media (min-width: 1600px) {
+  .pillars-title-gradient {
+    margin-left: 0rem;
+  }
+  .pillars-title-grey {
+    margin-left: 0;
+  }
+  .grey-question {
+    margin-left: 6rem;
+  }
+  .sub-heading {
+    margin-left: 6rem;
+    margin-top: 1rem;
+  }
+  .pillar-section {
+    margin-left: 6rem;
+    align-items: flex-start;
+  }
+  .pillar-filters,
+  .pillar-cards-row {
+    margin-left: 6rem;
+  }
+}
+
+.sub-heading-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.2rem;
+  width: 100%;
+}
+
+.pillar-arrows-top {
+  margin-right: 4rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+@media (min-width: 1600px) {
+  .sub-heading-row {
+    margin-left: 0rem;
+    width: calc(100% - 6rem);
   }
 }
