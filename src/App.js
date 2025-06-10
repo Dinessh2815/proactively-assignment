@@ -119,7 +119,6 @@ function App() {
     "https://placehold.co/600x400",
   ];
 
-  // Move arrow state/handlers to App for sub-heading arrows
   const [selected, setSelected] = useState(0);
   const [startIdx, setStartIdx] = useState(0);
   const visibleCount = window.innerWidth >= 1600 ? 5 : 3;
@@ -142,9 +141,203 @@ function App() {
   return (
     <div className="app">
       <Navbar />
-      <div className="hero-section">
-        <ImageScroller images={images} className="left-scroller" />
-        <ImageScroller images={images} reverse />
+      {/* Desktop/Medium layout */}
+      <div className="desktop-layout">
+        <div className="hero-section">
+          <ImageScroller images={images} className="left-scroller" />
+          <ImageScroller images={images} reverse />
+          <div className="hero-text-section">
+            <div className="lifestyle-medicine-title">
+              Book an Appointment with{" "}
+              <span className="gradient-text">lifestyle medicine</span> experts
+            </div>
+            <div className="lifestyle-medicine-subtitle">
+              Optimize your lifestyle and reverse chronic diseases
+            </div>
+          </div>
+        </div>
+        <div className="search-bar-container">
+          <form className="search-bar-form">
+            <div className="search-input search-input-icon">
+              <span className="search-icon">
+                <svg
+                  width="20"
+                  height="20"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M19 19l-4-4m2-5A8 8 0 1 1 3 3a8 8 0 0 1 14 7Z"
+                    stroke="#A0A0A0"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </span>
+              <input
+                type="text"
+                placeholder="Condition, procedure, speciality..."
+              />
+            </div>
+            <div className="search-input search-input-icon">
+              <span className="search-icon">
+                <svg
+                  width="20"
+                  height="20"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M10 2a6 6 0 0 1 6 6c0 4.5-6 10-6 10S4 12.5 4 8a6 6 0 0 1 6-6Zm0 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"
+                    stroke="#A0A0A0"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </span>
+              <input type="text" placeholder="City, state, or zipcode" />
+            </div>
+            <div className="search-input search-input-icon">
+              <span className="search-icon">
+                <svg
+                  width="20"
+                  height="20"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <rect
+                    x="2"
+                    y="5"
+                    width="16"
+                    height="10"
+                    rx="2"
+                    stroke="#A0A0A0"
+                    strokeWidth="2"
+                  />
+                  <path
+                    d="M6 9h.01M10 9h.01M14 9h.01"
+                    stroke="#A0A0A0"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                  />
+                </svg>
+              </span>
+              <input type="text" placeholder="Insurance carrier" />
+            </div>
+            <button className="find-now-btn" type="submit">
+              <span className="find-now-icon">
+                <svg
+                  width="21"
+                  height="21"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M19 19l-4-4m2-5A8 8 0 1 1 3 3a8 8 0 0 1 14 7Z"
+                    stroke="#fff"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </span>
+              Find now
+            </button>
+          </form>
+        </div>
+        <div className="slant-bar"></div>
+        <div className="main-content-desktop">
+          <div className="grey-question">HOW IT WORKS</div>
+          <div className="sub-heading-row">
+            <div className="sub-heading">
+              <span className="pillars-title-gradient">
+                Lifestyle as medicine:
+              </span>{" "}
+              <span className="pillars-title-grey">The six pillars</span>
+            </div>
+            <div className="pillar-arrows pillar-arrows-top">
+              <button
+                className="pillar-arrow-btn"
+                onClick={handleLeft}
+                disabled={startIdx === 0}
+              >
+                <svg
+                  width="24"
+                  height="24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <circle
+                    cx="12"
+                    cy="12"
+                    r="11"
+                    stroke="#D9D9D9"
+                    strokeWidth="2"
+                  />
+                  <path
+                    d="M14.5 8l-4 4 4 4"
+                    stroke="#222"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </button>
+              <button
+                className="pillar-arrow-btn"
+                onClick={handleRight}
+                disabled={startIdx >= pillarData.length - visibleCount}
+              >
+                <svg
+                  width="24"
+                  height="24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <circle
+                    cx="12"
+                    cy="12"
+                    r="11"
+                    stroke="#D9D9D9"
+                    strokeWidth="2"
+                  />
+                  <path
+                    d="M9.5 8l4 4-4 4"
+                    stroke="#222"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </button>
+            </div>
+          </div>
+          <div className="pillar-section">
+            <div className="pillar-filters">
+              {filterKeys.map((key, idx) => (
+                <button
+                  key={key}
+                  className={`pillar-filter-btn${
+                    selected === idx ? " selected" : ""
+                  }`}
+                  onClick={() => handleFilter(idx)}
+                >
+                  {key}
+                </button>
+              ))}
+            </div>
+            <div className="pillar-cards-row">
+              {cardsToShow.map((card, idx) => (
+                <Card key={card.key} {...card} />
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+      {/* Mobile layout */}
+      <div className="mobile-layout">
         <div className="hero-text-section">
           <div className="lifestyle-medicine-title">
             Book an Appointment with{" "}
@@ -154,168 +347,188 @@ function App() {
             Optimize your lifestyle and reverse chronic diseases
           </div>
         </div>
-      </div>
-      <div className="search-bar-container">
-        <form className="search-bar-form">
-          <div className="search-input search-input-icon">
-            <span className="search-icon">
-              <svg
-                width="20"
-                height="20"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M19 19l-4-4m2-5A8 8 0 1 1 3 3a8 8 0 0 1 14 7Z"
-                  stroke="#A0A0A0"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </span>
-            <input
-              type="text"
-              placeholder="Condition, procedure, speciality..."
-            />
-          </div>
-          <div className="search-input search-input-icon">
-            <span className="search-icon">
-              <svg
-                width="20"
-                height="20"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M10 2a6 6 0 0 1 6 6c0 4.5-6 10-6 10S4 12.5 4 8a6 6 0 0 1 6-6Zm0 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"
-                  stroke="#A0A0A0"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </span>
-            <input type="text" placeholder="City, state, or zipcode" />
-          </div>
-          <div className="search-input search-input-icon">
-            <span className="search-icon">
-              <svg
-                width="20"
-                height="20"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <rect
-                  x="2"
-                  y="5"
-                  width="16"
-                  height="10"
-                  rx="2"
-                  stroke="#A0A0A0"
-                  strokeWidth="2"
-                />
-                <path
-                  d="M6 9h.01M10 9h.01M14 9h.01"
-                  stroke="#A0A0A0"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                />
-              </svg>
-            </span>
-            <input type="text" placeholder="Insurance carrier" />
-          </div>
-          <button className="find-now-btn" type="submit">
-            <span className="find-now-icon">
-              <svg
-                width="21"
-                height="21"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M19 19l-4-4m2-5A8 8 0 1 1 3 3a8 8 0 0 1 14 7Z"
-                  stroke="#fff"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </span>
-            Find now
-          </button>
-        </form>
-      </div>
-      <div className="slant-bar"></div>
-      <div className="grey-question">HOW IT WORKS</div>
-      <div className="sub-heading-row">
-        <div className="sub-heading">
-          <span className="pillars-title-gradient">Lifestyle as medicine:</span>{" "}
-          <span className="pillars-title-grey">The six pillars</span>
-        </div>
-        <div className="pillar-arrows pillar-arrows-top">
-          <button
-            className="pillar-arrow-btn"
-            onClick={handleLeft}
-            disabled={startIdx === 0}
-          >
-            <svg
-              width="24"
-              height="24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <circle cx="12" cy="12" r="11" stroke="#D9D9D9" strokeWidth="2" />
-              <path
-                d="M14.5 8l-4 4 4 4"
-                stroke="#222"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
+        <div className="search-bar-container">
+          <form className="search-bar-form">
+            <div className="search-input search-input-icon">
+              <span className="search-icon">
+                <svg
+                  width="20"
+                  height="20"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M19 19l-4-4m2-5A8 8 0 1 1 3 3a8 8 0 0 1 14 7Z"
+                    stroke="#A0A0A0"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </span>
+              <input
+                type="text"
+                placeholder="Condition, procedure, speciality..."
               />
-            </svg>
-          </button>
-          <button
-            className="pillar-arrow-btn"
-            onClick={handleRight}
-            disabled={startIdx >= pillarData.length - visibleCount}
-          >
-            <svg
-              width="24"
-              height="24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <circle cx="12" cy="12" r="11" stroke="#D9D9D9" strokeWidth="2" />
-              <path
-                d="M9.5 8l4 4-4 4"
-                stroke="#222"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </button>
-        </div>
-      </div>
-      <div className="pillar-section">
-        <div className="pillar-filters">
-          {filterKeys.map((key, idx) => (
-            <button
-              key={key}
-              className={`pillar-filter-btn${
-                selected === idx ? " selected" : ""
-              }`}
-              onClick={() => handleFilter(idx)}
-            >
-              {key}
+            </div>
+            <div className="search-input search-input-icon">
+              <span className="search-icon">
+                <svg
+                  width="20"
+                  height="20"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M10 2a6 6 0 0 1 6 6c0 4.5-6 10-6 10S4 12.5 4 8a6 6 0 0 1 6-6Zm0 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"
+                    stroke="#A0A0A0"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </span>
+              <input type="text" placeholder="City, state, or zipcode" />
+            </div>
+            <div className="search-input search-input-icon">
+              <span className="search-icon">
+                <svg
+                  width="20"
+                  height="20"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <rect
+                    x="2"
+                    y="5"
+                    width="16"
+                    height="10"
+                    rx="2"
+                    stroke="#A0A0A0"
+                    strokeWidth="2"
+                  />
+                  <path
+                    d="M6 9h.01M10 9h.01M14 9h.01"
+                    stroke="#A0A0A0"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                  />
+                </svg>
+              </span>
+              <input type="text" placeholder="Insurance carrier" />
+            </div>
+            <button className="find-now-btn" type="submit">
+              <span className="find-now-icon">
+                <svg
+                  width="21"
+                  height="21"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M19 19l-4-4m2-5A8 8 0 1 1 3 3a8 8 0 0 1 14 7Z"
+                    stroke="#fff"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </span>
+              Find now
             </button>
-          ))}
+          </form>
         </div>
-        <div className="pillar-cards-row">
-          {cardsToShow.map((card, idx) => (
-            <Card key={card.key} {...card} />
-          ))}
+        <div className="slant-bar"></div>
+        <div className="mobile-image-scrollers">
+          <ImageScroller images={images} className="left-scroller" />
+          <ImageScroller images={images} reverse />
+        </div>
+        <div className="main-content-mobile">
+          <div className="grey-question">HOW IT WORKS</div>
+          <div className="sub-heading-row">
+            <div className="sub-heading">
+              <span className="pillars-title-gradient">
+                Lifestyle as medicine:
+              </span>{" "}
+              <span className="pillars-title-grey">The six pillars</span>
+            </div>
+            <div className="pillar-arrows pillar-arrows-top">
+              <button
+                className="pillar-arrow-btn"
+                onClick={handleLeft}
+                disabled={startIdx === 0}
+              >
+                <svg
+                  width="24"
+                  height="24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <circle
+                    cx="12"
+                    cy="12"
+                    r="11"
+                    stroke="#D9D9D9"
+                    strokeWidth="2"
+                  />
+                  <path
+                    d="M14.5 8l-4 4 4 4"
+                    stroke="#222"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </button>
+              <button
+                className="pillar-arrow-btn"
+                onClick={handleRight}
+                disabled={startIdx >= pillarData.length - visibleCount}
+              >
+                <svg
+                  width="24"
+                  height="24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <circle
+                    cx="12"
+                    cy="12"
+                    r="11"
+                    stroke="#D9D9D9"
+                    strokeWidth="2"
+                  />
+                  <path
+                    d="M9.5 8l4 4-4 4"
+                    stroke="#222"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </button>
+            </div>
+          </div>
+          <div className="pillar-section">
+            <div className="pillar-filters">
+              {filterKeys.map((key, idx) => (
+                <button
+                  key={key}
+                  className={`pillar-filter-btn${
+                    selected === idx ? " selected" : ""
+                  }`}
+                  onClick={() => handleFilter(idx)}
+                >
+                  {key}
+                </button>
+              ))}
+            </div>
+            <div className="pillar-cards-row">
+              {cardsToShow.map((card, idx) => (
+                <Card key={card.key} {...card} />
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </div>
