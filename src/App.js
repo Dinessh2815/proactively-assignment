@@ -443,90 +443,76 @@ function App() {
           <ImageScroller images={images} className="left-scroller" />
           <ImageScroller images={images} reverse />
         </div>
-        <div className="main-content-mobile">
+        <div className="main-content-mobile main-content-mobile-centered">
           <div className="grey-question">HOW IT WORKS</div>
-          <div className="sub-heading-row">
+          <div className="sub-heading-row" style={{ justifyContent: "center" }}>
             <div className="sub-heading">
               <span className="pillars-title-gradient">
                 Lifestyle as medicine:
               </span>{" "}
               <span className="pillars-title-grey">The six pillars</span>
             </div>
-            <div className="pillar-arrows pillar-arrows-top">
-              <button
-                className="pillar-arrow-btn"
-                onClick={handleLeft}
-                disabled={startIdx === 0}
-              >
-                <svg
-                  width="24"
-                  height="24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <circle
-                    cx="12"
-                    cy="12"
-                    r="11"
-                    stroke="#D9D9D9"
-                    strokeWidth="2"
-                  />
-                  <path
-                    d="M14.5 8l-4 4 4 4"
-                    stroke="#222"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </button>
-              <button
-                className="pillar-arrow-btn"
-                onClick={handleRight}
-                disabled={startIdx >= pillarData.length - visibleCount}
-              >
-                <svg
-                  width="24"
-                  height="24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <circle
-                    cx="12"
-                    cy="12"
-                    r="11"
-                    stroke="#D9D9D9"
-                    strokeWidth="2"
-                  />
-                  <path
-                    d="M9.5 8l4 4-4 4"
-                    stroke="#222"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </button>
-            </div>
           </div>
-          <div className="pillar-section">
-            <div className="pillar-filters">
-              {filterKeys.map((key, idx) => (
-                <button
-                  key={key}
-                  className={`pillar-filter-btn${
-                    selected === idx ? " selected" : ""
-                  }`}
-                  onClick={() => handleFilter(idx)}
-                >
-                  {key}
-                </button>
-              ))}
-            </div>
-            <div className="pillar-cards-row">
-              {cardsToShow.map((card, idx) => (
-                <Card key={card.key} {...card} />
-              ))}
+          <div className="pillar-section" style={{ width: "100%" }}>
+            <div
+              className="pillar-cards-row pillar-cards-row-mobile"
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "center",
+                alignItems: "center",
+                position: "relative",
+                height: "390px", // match card height
+                width: "100%",
+                overflow: "hidden",
+              }}
+              onTouchStart={(e) => {
+                e.currentTarget.touchStartX = e.touches[0].clientX;
+              }}
+              onTouchMove={(e) => {
+                const touchStartX = e.currentTarget.touchStartX;
+                if (touchStartX !== undefined) {
+                  const touchEndX = e.touches[0].clientX;
+                  const diff = touchStartX - touchEndX;
+                  if (Math.abs(diff) > 40) {
+                    if (diff > 0 && startIdx < pillarData.length - 1) {
+                      setStartIdx(startIdx + 1);
+                    } else if (diff < 0 && startIdx > 0) {
+                      setStartIdx(startIdx - 1);
+                    }
+                    e.currentTarget.touchStartX = undefined;
+                  }
+                }
+              }}
+              onTouchEnd={(e) => {
+                e.currentTarget.touchStartX = undefined;
+              }}
+            >
+              {/* Animated card transition for mobile */}
+              <div
+                key={pillarData[startIdx].key}
+                className="mobile-card-anim-wrapper"
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  position: "absolute",
+                  left: 0,
+                  top: 0,
+                  transition:
+                    "opacity 0.35s cubic-bezier(.4,2,.6,1), transform 0.35s cubic-bezier(.4,2,.6,1)",
+                  opacity: 1,
+                  transform: "translateX(0)",
+                }}
+              >
+                <Card
+                  key={pillarData[startIdx].key}
+                  {...pillarData[startIdx]}
+                  isMobile={true}
+                />
+              </div>
             </div>
           </div>
         </div>
