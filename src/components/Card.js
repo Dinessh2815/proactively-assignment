@@ -9,12 +9,19 @@ const Card = ({
   title,
   description,
   isMobile,
+  className,
 }) => {
   return (
     <div
-      className={isMobile ? "pillar-card pillar-card-mobile" : "pillar-card"}
+      className={`pillar-card ${isMobile ? "pillar-card-mobile" : ""} ${
+        className || ""
+      }`}
     >
-      <div className="pillar-card-image-container pillar-card-image-container-mobile">
+      <div
+        className={`pillar-card-image-container ${
+          isMobile ? "pillar-card-image-container-mobile" : ""
+        }`}
+      >
         <img src={image} alt={title} className="pillar-card-image" />
         {badgeText && (
           <div className="pillar-card-badge" style={{ background: badgeBg }}>

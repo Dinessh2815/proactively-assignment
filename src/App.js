@@ -453,6 +453,29 @@ function App() {
               <span className="pillars-title-grey">The six pillars</span>
             </div>
           </div>
+
+          {/* Card indicator dots */}
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              gap: "8px",
+              marginBottom: "20px",
+            }}
+          >
+            {pillarData.map((_, idx) => (
+              <div
+                key={`dot-${idx}`}
+                style={{
+                  width: "8px",
+                  height: "8px",
+                  borderRadius: "50%",
+                  backgroundColor: startIdx === idx ? "#4CB8C4" : "#D9D9D9",
+                  transition: "background-color 0.3s ease",
+                }}
+              />
+            ))}
+          </div>
           <div className="pillar-section" style={{ width: "100%" }}>
             <div
               className="pillar-cards-row pillar-cards-row-mobile"
@@ -465,47 +488,151 @@ function App() {
                 height: "390px", // match card height
                 width: "100%",
                 overflow: "hidden",
+                perspective: "1000px", // Add perspective for better 3D effect
               }}
               onTouchStart={(e) => {
                 e.currentTarget.touchStartX = e.touches[0].clientX;
+                e.currentTarget.touchStartY = e.touches[0].clientY;
+                e.currentTarget.touchMoved = false;
+                e.currentTarget.swiping = false;
+                // Add classes for transition animation control
+                const cards = e.currentTarget.querySelectorAll(
+                  ".mobile-card-anim-wrapper"
+                );
+                cards.forEach((card) => card.classList.add("swiping"));
               }}
               onTouchMove={(e) => {
                 const touchStartX = e.currentTarget.touchStartX;
-                if (touchStartX !== undefined) {
-                  const touchEndX = e.touches[0].clientX;
-                  const diff = touchStartX - touchEndX;
-                  if (Math.abs(diff) > 40) {
-                    if (diff > 0 && startIdx < pillarData.length - 1) {
-                      setStartIdx(startIdx + 1);
-                    } else if (diff < 0 && startIdx > 0) {
-                      setStartIdx(startIdx - 1);
+                const touchStartY = e.currentTarget.touchStartY;
+
+                if (touchStartX !== undefined && touchStartY !== undefined) {
+                  const touchCurrentX = e.touches[0].clientX;
+                  const touchCurrentY = e.touches[0].clientY;
+                  const diffX = touchCurrentX - touchStartX;
+                  const diffY = touchCurrentY - touchStartY;
+
+                  // Determine if this is a horizontal swipe (prevent vertical scrolling interference)
+                  if (!e.currentTarget.swiping) {
+                    if (
+                      Math.abs(diffX) > Math.abs(diffY) &&
+                      Math.abs(diffX) > 10
+                    ) {
+                      e.currentTarget.swiping = true;
+                      e.preventDefault(); // Prevent scrolling when swiping horizontally
                     }
-                    e.currentTarget.touchStartX = undefined;
+                  }
+
+                  if (e.currentTarget.swiping) {
+                    e.currentTarget.touchMoved = true;
+
+                    // Apply dynamic transform to cards based on swipe
+                    const mainCard = e.currentTarget.querySelector(
+                      ".mobile-card-anim-wrapper:nth-child(2)"
+                    );
+                    const prevCard = e.currentTarget.querySelector(
+                      ".mobile-card-anim-wrapper:nth-child(1)"
+                    );
+                    const nextCard = e.currentTarget.querySelector(
+                      ".mobile-card-anim-wrapper:nth-child(3)"
+                    );
+
+                    // Calculate swipe percentage (maximum 50% of screen width)
+                    const maxSwipe = window.innerWidth * 0.5;
+                    const swipePercent = Math.min(
+                      Math.abs(diffX) / maxSwipe,
+                      1
+                    );
+
+                    if (mainCard) {
+                      mainCard.style.transform = `translateX(${
+                        diffX * 0.5
+                      }px) scale(${1 - swipePercent * 0.15})`;
+                      mainCard.style.opacity = `${1 - swipePercent * 0.3}`;
+                    }
+
+                    // Move side cards accordingly with dynamic scaling
+                    if (prevCard && diffX > 0) {
+                      // Previous card coming into view
+                      const moveAmount =
+                        -50 + diffX / (window.innerWidth * 0.01);
+                      const scaleAmount = 0.85 + swipePercent * 0.15;
+                      prevCard.style.transform = `translateX(${moveAmount}vw) scale(${scaleAmount})`;
+                      prevCard.style.opacity = `${0.7 + swipePercent * 0.3}`;
+                    }
+
+                    if (nextCard && diffX < 0) {
+                      // Next card coming into view
+                      const moveAmount =
+                        50 + diffX / (window.innerWidth * 0.01);
+                      const scaleAmount = 0.85 + swipePercent * 0.15;
+                      nextCard.style.transform = `translateX(${moveAmount}vw) scale(${scaleAmount})`;
+                      nextCard.style.opacity = `${0.7 + swipePercent * 0.3}`;
+                    }
                   }
                 }
               }}
               onTouchEnd={(e) => {
+                if (!e.currentTarget.touchStartX) return;
+
+                const touchStartX = e.currentTarget.touchStartX;
+                const touchEndX = e.changedTouches[0].clientX;
+                const diffX = touchEndX - touchStartX;
+
+                // Remove swiping class to re-enable transitions
+                const cards = e.currentTarget.querySelectorAll(
+                  ".mobile-card-anim-wrapper"
+                );
+                cards.forEach((card) => card.classList.remove("swiping"));
+
+                // Reset transforms on all cards with a small delay to allow animation
+                setTimeout(() => {
+                  cards.forEach((card) => {
+                    card.style.transform = "";
+                    card.style.opacity = "";
+                  });
+                }, 50);
+
+                // Check if swipe was significant enough to change cards (20% of screen width)
+                const swipeThreshold = window.innerWidth * 0.2;
+
+                if (
+                  e.currentTarget.swiping &&
+                  Math.abs(diffX) > swipeThreshold
+                ) {
+                  if (diffX < 0 && startIdx < pillarData.length - 1) {
+                    // Swipe left - show next card
+                    setStartIdx(startIdx + 1);
+                  } else if (diffX > 0 && startIdx > 0) {
+                    // Swipe right - show previous card
+                    setStartIdx(startIdx - 1);
+                  }
+                }
+
                 e.currentTarget.touchStartX = undefined;
+                e.currentTarget.touchStartY = undefined;
+                e.currentTarget.touchMoved = false;
+                e.currentTarget.swiping = false;
               }}
             >
-              {/* Animated card transition for mobile */}
+              {/* Previous card (partially visible on the left) */}
+              {startIdx > 0 && (
+                <div
+                  key={pillarData[startIdx - 1].key + "-side-prev"}
+                  className="mobile-card-anim-wrapper"
+                >
+                  <Card
+                    key={pillarData[startIdx - 1].key}
+                    {...pillarData[startIdx - 1]}
+                    isMobile={true}
+                    className="pillar-card-side-prev"
+                  />
+                </div>
+              )}
+
+              {/* Main card */}
               <div
-                key={pillarData[startIdx].key}
+                key={pillarData[startIdx].key + "-main"}
                 className="mobile-card-anim-wrapper"
-                style={{
-                  width: "100%",
-                  height: "100%",
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  position: "absolute",
-                  left: 0,
-                  top: 0,
-                  transition:
-                    "opacity 0.35s cubic-bezier(.4,2,.6,1), transform 0.35s cubic-bezier(.4,2,.6,1)",
-                  opacity: 1,
-                  transform: "translateX(0)",
-                }}
               >
                 <Card
                   key={pillarData[startIdx].key}
@@ -513,6 +640,21 @@ function App() {
                   isMobile={true}
                 />
               </div>
+
+              {/* Next card (partially visible on the right) */}
+              {startIdx < pillarData.length - 1 && (
+                <div
+                  key={pillarData[startIdx + 1].key + "-side"}
+                  className="mobile-card-anim-wrapper"
+                >
+                  <Card
+                    key={pillarData[startIdx + 1].key}
+                    {...pillarData[startIdx + 1]}
+                    isMobile={true}
+                    className="pillar-card-side"
+                  />
+                </div>
+              )}
             </div>
           </div>
         </div>
