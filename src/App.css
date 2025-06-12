@@ -601,18 +601,7 @@
     justify-content: center;
     display: flex;
   }
-  .pillar-section {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  .pillar-cards-row,
-  .pillar-cards-row-mobile {
-    justify-content: center;
-    margin-left: 0;
-    margin-right: 0;
-  }
+
 }
 
 /* Layout toggles for mobile/desktop */
@@ -783,19 +772,6 @@
     padding: 0 0.2em;
     margin-top: 0.3rem;
   }
-  .pillar-section {
-    align-items: center;
-    justify-content: center;
-    width: 100vw;
-    margin: 0 auto;
-  }
-  .pillar-cards-row,
-  .pillar-cards-row-mobile {
-    justify-content: center;
-    align-items: center;
-    margin-left: 0;
-    margin-right: 0;
-    width: 100vw;
-    display: flex;
-  }
+
+
 }

@@ -487,7 +487,6 @@ function App() {
                 position: "relative",
                 height: "390px", // match card height
                 width: "100%",
-                overflow: "hidden",
                 perspective: "1000px", // Add perspective for better 3D effect
               }}
               onTouchStart={(e) => {
