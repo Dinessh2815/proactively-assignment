@@ -93,7 +93,7 @@
   }
 
   .pillar-cards-row {
-    margin-left: 50px;
+    margin-left: 80px;
     justify-content: start;
     gap: 1rem;
     flex-wrap: nowrap;
@@ -108,7 +108,7 @@
   }
 
   .pillar-filters {
-    margin-left: 1rem;
+    margin-left: 1.3rem;
     justify-content: flex-start;
     padding: 0 1.5rem;
   }
