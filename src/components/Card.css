@@ -171,19 +171,19 @@
     }
   }
 
-/* Updated positioning for the pillar-cards-row-mobile */
-.pillar-cards-row-mobile {
-  position: relative;
-  padding: 0;
-  /* Add margin-left to move cards slightly to the right (centering) */
-  padding-left: -10%; /* This is the key change to center the cards */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  box-sizing: border-box;
-  overflow-x: visible;
-  gap: 0;
-}
+  /* Updated positioning for the pillar-cards-row-mobile */
+  .pillar-cards-row-mobile {
+    position: relative;
+    padding: 0;
+    /* Add margin-left to move cards slightly to the right (centering) */
+    padding-left: -10%; /* This is the key change to center the cards */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    overflow-x: visible;
+    gap: 0;
+  }
 
   .pillar-card-image-container.pillar-card-image-container-mobile {
     height: 200px;
@@ -227,5 +227,51 @@
   /* Add a subtle hover effect for cards */
   .pillar-card.pillar-card-mobile:hover {
     box-shadow: 0px 12px 48px 0px #00000020;
+  }
+}
+
+@media (min-width: 901px) and (max-width: 1199px) {
+  .pillar-card {
+    width: 350px;
+    min-width: 300px;
+    max-width: 350px;
+    margin: 0 0.5rem;
+  }
+
+  .pillar-card-image-container {
+    height: 240px;
+  }
+
+  .pillar-card-title {
+    font-size: 1.2rem;
+  }
+
+  .pillar-card-description {
+    font-size: 0.95rem;
+  }
+}
+
+@media (min-width: 601px) and (max-width: 900px) {
+  .pillar-card {
+    width: 400px;
+    min-width: 250px;
+    margin: 0 2rem;
+  }
+
+  .pillar-card-image-container {
+    height: 210px;
+  }
+
+  .pillar-card-title {
+    font-size: 1.15rem;
+  }
+
+  .pillar-card-description {
+    font-size: 0.9rem;
+  }
+
+  .pillar-card-badge {
+    font-size: 0.9rem;
+    padding: 0.3rem 0.9rem 0.3rem 0.6rem;
   }
 }

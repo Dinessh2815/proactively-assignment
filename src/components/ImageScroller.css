@@ -54,6 +54,30 @@
   }
 }
 
+@media (min-width: 901px) and (max-width: 1199px) {
+  .image-scroller {
+    height: 450px;
+    width: 240px;
+  }
+  .image-track img {
+    height: 260px;
+    margin-bottom: 24px;
+    border-radius: 22px;
+  }
+}
+
+@media (min-width: 601px) and (max-width: 900px) {
+  .image-scroller {
+    height: 400px;
+    width: 210px;
+  }
+  .image-track img {
+    height: 230px;
+    margin-bottom: 20px;
+    border-radius: 20px;
+  }
+}
+
 @media (min-width: 1600px) {
   .image-scroller {
     height: 650px;

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { ImageScroller } from "./components/ImageScroller";
 import Navbar from "./components/Navbar";
 import Card from "./components/Card";
@@ -132,7 +132,25 @@ function App() {
 
   const [selected, setSelected] = useState(0);
   const [startIdx, setStartIdx] = useState(0);
-  const visibleCount = window.innerWidth >= 1600 ? 5 : 3;
+  const [visibleCount, setVisibleCount] = useState(3); // Default to 3 for wider screens
+
+  // Update visibleCount based on screen width
+  const getVisibleCount = () => {
+    if (window.innerWidth >= 1600) return 5;
+    if (window.innerWidth >= 901) return 3;
+    if (window.innerWidth >= 600) return 2;
+    return 1;
+  };
+
+  // Update visible count on window resize
+  useEffect(() => {
+    const handleResize = () => {
+      setVisibleCount(getVisibleCount());
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const handleFilter = (idx) => {
     setSelected(idx);
