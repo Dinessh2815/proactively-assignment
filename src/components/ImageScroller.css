@@ -35,7 +35,7 @@
 
 .image-track img {
   width: 100%;
-  height: 120px;
+  height: 160px;
   object-fit: cover;
   margin-bottom: 18px;
   border-radius: 26px;
@@ -73,7 +73,7 @@
     padding: 0;
     margin: 0;
     position: relative;
-    height: 160px;
+    height: 320px; /* Increased from 160px to 320px */
   }
   .image-track {
     display: flex;
@@ -83,9 +83,12 @@
     gap: 0.7rem;
     align-items: center;
   }
+  .image-scroller.mobile-scroller .image-track {
+    animation: scroll-right 15s linear infinite; /* Right to left, longer duration for more images */
+  }
   .image-track img {
     width: 220px;
-    height: 140px;
+    height: 300px; /* Increased from 280px to 300px */
     object-fit: cover;
     border-radius: 16px;
     margin: 0;
@@ -98,5 +101,14 @@
   }
   100% {
     transform: translateX(-50%);
+  }
+}
+
+@keyframes scroll-right {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(0);
   }
 }

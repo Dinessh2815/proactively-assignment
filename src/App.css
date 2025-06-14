@@ -561,7 +561,7 @@
     padding: 0;
     margin: 0;
     position: relative;
-    height: 160px;
+    height: 320px; /* Increased from 160px to 320px */
   }
   .image-track {
     display: flex;
@@ -573,7 +573,7 @@
   }
   .image-track img {
     width: 220px;
-    height: 140px;
+    height: 300px; /* Increased from 140px to 300px */
     object-fit: cover;
     border-radius: 16px;
     margin: 0;
@@ -601,7 +601,6 @@
     justify-content: center;
     display: flex;
   }
-
 }
 
 /* Layout toggles for mobile/desktop */
@@ -762,7 +761,7 @@
   .navbar-left {
     margin-left: -2rem;
   }
-  .pillars-title-gradient{
+  .pillars-title-gradient {
     font-size: 1.4rem;
     margin-left: 0;
   }
@@ -772,6 +771,4 @@
     padding: 0 0.2em;
     margin-top: 0.3rem;
   }
-
-
 }

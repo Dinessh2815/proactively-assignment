@@ -113,11 +113,22 @@ const pillarData = [
 const filterKeys = pillarData.map((p) => p.key);
 
 function App() {
-  const images = [
-    "https://placehold.co/600x400",
-    "https://placehold.co/600x400",
-    "https://placehold.co/600x400",
+  const col1Images = [
+    "/images/col1-img1.png",
+    "/images/col1-img2.png",
+    "/images/col1-img3.png",
+    "/images/col1-img4.png",
   ];
+
+  const col2Images = [
+    "/images/col2-img1.png",
+    "/images/col2-img2.png",
+    "/images/col2-img3.png",
+    "/images/col2-img4.png",
+  ];
+
+  // Combined images for mobile view
+  const combinedImages = [...col1Images, ...col2Images];
 
   const [selected, setSelected] = useState(0);
   const [startIdx, setStartIdx] = useState(0);
@@ -144,8 +155,8 @@ function App() {
       {/* Desktop/Medium layout */}
       <div className="desktop-layout">
         <div className="hero-section">
-          <ImageScroller images={images} className="left-scroller" />
-          <ImageScroller images={images} reverse />
+          <ImageScroller images={col1Images} className="left-scroller" />
+          <ImageScroller images={col2Images} reverse />
           <div className="hero-text-section">
             <div className="lifestyle-medicine-title">
               Book an Appointment with{" "}
@@ -440,8 +451,7 @@ function App() {
         </div>
         <div className="slant-bar"></div>
         <div className="mobile-image-scrollers">
-          <ImageScroller images={images} className="left-scroller" />
-          <ImageScroller images={images} reverse />
+          <ImageScroller images={combinedImages} className="mobile-scroller" />
         </div>
         <div className="main-content-mobile main-content-mobile-centered">
           <div className="grey-question">HOW IT WORKS</div>
