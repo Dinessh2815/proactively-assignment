@@ -254,7 +254,9 @@
 @media (min-width: 601px) and (max-width: 900px) {
   .pillar-card {
     width: 300px;
-    margin: 0 0.5rem;
+    min-width: 300px;
+    max-width: 300px;
+    margin: 0 2rem;
   }
 
   .pillar-card-image-container {

@@ -132,31 +132,30 @@
     align-items: center;
   }
   .pillar-cards-row {
-    margin-left: -10px;
+    margin-left: -50px;
     justify-content: flex-start;
     flex-wrap: nowrap;
-    gap: 0.5rem;
+    gap: 1.5rem;
     overflow-x: auto;
     padding-bottom: 1.5rem;
     scrollbar-width: none;
     -ms-overflow-style: none;
-    width: 100%;
+    width: calc(100% - 4rem);
   }
 
   .pillar-cards-row::-webkit-scrollbar {
     display: none;
   }
   .pillar-cards-row > div {
-    min-width: 400px;
-    max-width: 400px;
+    min-width: 320px;
+    max-width: 320px;
     flex: 0 0 auto;
   }
-
   .pillar-filters {
-    margin-left: 4rem;
+    margin-left: 0rem;
     margin-right: 0;
     justify-content: flex-start;
-    width: 100%;
+    width: calc(100% - 4rem);
     padding: 0 1rem;
     overflow-x: auto;
     scrollbar-width: none;
